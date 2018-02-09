@@ -17,7 +17,7 @@ import torch.nn.functional as F
 from utils import *
 from net import *
 
-use_GPU = True
+use_GPU = False
 max_iter = 100
 holdF = 0.1
 
@@ -68,7 +68,7 @@ classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship'
 # initalize nn
 # Net1(n_cov1, n_cov2, n_kernel, n_hid1, n_hid2)
 # net = Net1(6, 12, 3, 100, 50)
-net = Net_2(n_cov1=32, n_cov2=64, n_kernel1=3, n_kernel2=3, n_hid1=32, n_hid2=20)
+net = Net_exp()
 
 # use GPU
 if use_GPU:
@@ -83,9 +83,9 @@ optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 epoch = 0
 stop = False
 val_acc = []
-f = open('net2.txt','w')
 # train dataset
 #%%
+print('Start Training')
 while epoch <= max_iter & ~stop:  # loop over the dataset multiple times
 
     running_loss = 0.0
@@ -126,8 +126,8 @@ while epoch <= max_iter & ~stop:  # loop over the dataset multiple times
     # validation set's accuracy decrease for three consequtive epoch, stop the training
     val_acc.append(correct)
 
-    f.write("correct" + '\n')
-
+    f.write(correct)
+    print(val_acc[epoch])
     if epoch >= 4:
         if (val_acc[epoch] < val_acc[epoch-1]) and (val_acc[epoch-1] < val_acc[epoch-2]) and (val_acc[epoch-2] < val_acc[epoch-3]):
 
@@ -135,20 +135,20 @@ while epoch <= max_iter & ~stop:  # loop over the dataset multiple times
 
     epoch += 1
 
-
-
-
 print('Finished Training')
 
 
 # test dataepoch
 correct_test = testnet(testloader, net, use_GPU)
 
-print('Accuracy of the network on the 10000 test images: %d %%' % (
-    100 * correct))
+print('Accuracy of the network on the 10000 test images: %d %%' % (100 * correct))
 
-
+output_file = 'example_accuracy.txt'
+f = open(output_file,'w')
+f.write(", ".join(str(x) for x in val_acc) + '\n')
+f.write(correct_test)
 f.close()
+
 # save network
 torch.save(net, 'net_2.pkl') # save entire net
 torch.save(net.state_dict(), 'net_param_2.pkl')
