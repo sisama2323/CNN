@@ -15,9 +15,10 @@ from torch.autograd import Variable
 import torch.nn as nn
 import torch.nn.functional as F
 from utils import *
+from net import *
 
-use_GPU = False
-max_iter = 1000
+use_GPU = True
+max_iter = 100
 holdF = 0.1
 
 transform = transforms.Compose(
@@ -82,6 +83,7 @@ optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 epoch = 0
 stop = False
 val_acc = []
+f = open('net2.txt','w')
 # train dataset
 #%%
 while epoch <= max_iter & ~stop:  # loop over the dataset multiple times
@@ -123,6 +125,9 @@ while epoch <= max_iter & ~stop:  # loop over the dataset multiple times
 
     # validation set's accuracy decrease for three consequtive epoch, stop the training
     val_acc.append(correct)
+
+    f.write("correct" + '\n')
+
     if epoch >= 4:
         if (val_acc[epoch] < val_acc[epoch-1]) and (val_acc[epoch-1] < val_acc[epoch-2]) and (val_acc[epoch-2] < val_acc[epoch-3]):
 
@@ -142,6 +147,11 @@ correct_test = testnet(testloader, net, use_GPU)
 print('Accuracy of the network on the 10000 test images: %d %%' % (
     100 * correct))
 
+
+f.close()
+# save network
+torch.save(net, 'net_2.pkl') # save entire net
+torch.save(net.state_dict(), 'net_param_2.pkl')
 
 # save network
 # torch.save(net, 'net_alex.pkl') # save entire net
