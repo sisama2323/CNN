@@ -21,22 +21,6 @@ def splittrain(trainset, holdF):
     return val_idx, train_idx
 
 
-def accuracy(output, target, topk=(1,)):
-    """Computes the precision@k for the specified values of k"""
-    maxk = max(topk)
-    batch_size = target.size(0)
-
-    _, pred = output.topk(maxk, 1, True, True)
-    pred = pred.t()
-    correct = pred.eq(target.view(1, -1).expand_as(pred))
-
-    res = []
-    for k in topk:
-        correct_k = correct[:k].view(-1).float().sum(0, keepdim=True)
-        res.append(correct_k.mul_(100.0 / batch_size))
-    return res
-
-
 def testnet(testdata, net, use_GPU = False):
 
     top1 = AverageMeter()
@@ -58,7 +42,7 @@ def testnet(testdata, net, use_GPU = False):
         # torch.max(outputs.data,1) produce the most likely class for each test data
         # _, predicted = torch.max(outputs.data, 1)
         
-        prec1, prec5 = accuracy(outputs, labels, topk=(1,5))
+        prec1, prec5 = accuracy(outputs.data, labels, topk=(1,5))
 
         top1.update(prec1[0], labels.size(0))
         top5.update(prec5[0], labels.size(0))
@@ -70,7 +54,7 @@ def testnet(testdata, net, use_GPU = False):
         # total += float(labels.size(0))
         # correct += float(sum(predicted == labels))
 
-    return top1, top5
+    return top1.avg, top5.avg
 
 
 def numfeature(k):
@@ -100,3 +84,21 @@ class AverageMeter(object):
         self.sum += val * n
         self.count += n
         self.avg = self.sum / self.count
+
+def accuracy(output, target, topk=(1,)):
+    '''
+    Code Referece: ImageNet
+    '''
+    """Computes the precision@k for the specified values of k"""
+    maxk = max(topk)
+    batch_size = target.size(0)
+
+    _, pred = output.topk(maxk, 1, True, True)
+    pred = pred.t()
+    correct = pred.eq(target.view(1, -1).expand_as(pred))
+
+    res = []
+    for k in topk:
+        correct_k = correct[:k].view(-1).float().sum(0, keepdim=True)
+        res.append(correct_k.mul_(100.0 / batch_size))
+    return res
