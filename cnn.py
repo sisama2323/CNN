@@ -6,6 +6,10 @@ Reference:  http://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
 
 
 import numpy as np
+import os.path as osp
+import argparse
+import os
+import sys
 import torch 
 import torchvision
 import torchvision.transforms as transforms
@@ -17,10 +21,25 @@ import torch.nn.functional as F
 from utils import *
 from net import *
 
-use_GPU = True
+
+if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser(description='find the shortest path with the graph given')
+    parser.add_argument('model', type=str, help='model of cnn')
+    parser.add_argument("Usegpu", type=str2bool, nargs='?', const=True, help="whether use gpu or not")
+
+    args = parser.parse_args()
+
+    model = args.model
+    use_GPU = args.Usegpu
+
+print('model type: %s' %(model))
+print('Use GPU: %s' %(use_GPU))
+
+# use_GPU = True
 max_iter = 100
 holdF = 0.1
-model = 'google_net'
+# model = 'google_net'
 
 transform = transforms.Compose(
     [transforms.ToTensor(),
@@ -69,7 +88,20 @@ classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship'
 # initalize nn
 # Net1(n_cov1, n_cov2, n_kernel, n_hid1, n_hid2)
 # net = Net1(6, 12, 3, 100, 50)
-net = GoogLeNet()
+if model == 'google':
+    net = GoogLeNet()
+    # define adam, learning rate = 0.001, weight_decay
+    optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
+elif model == 'alex':
+    net = Alex_net()
+    # define adam, learning rate = 0.001, weight_decay
+    optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
+elif model == 'mine':
+    net = Net_2()
+    # define adam, learning rate = 0.001, weight_decay
+    optimizer = optim.Adam(net.parameters(), lr=0.001)
+
+    
 
 # use GPU
 if use_GPU:
@@ -78,8 +110,7 @@ if use_GPU:
 # define lose function
 criterion = nn.CrossEntropyLoss()
 
-# define adam, learning rate = 0.001, weight_decay
-optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
+
 
 epoch = 0
 stop = False
@@ -98,10 +129,10 @@ f5_val = open(output_file5,'w')
 f1_val = open(output_file1,'w')
 
 # store accuracy for test set
-output__test_file1 = ('net%s_accuracy_test1.txt' %(model))
-output__test_file5 = ('net%s_accuracy_test5.txt' %(model))
-f5_test = open(output__test_file5,'w')
-f1_test = open(output__test_file1,'w')
+output_test_file1 = ('net%s_accuracy_test1.txt' %(model))
+output_test_file5 = ('net%s_accuracy_test5.txt' %(model))
+f5_test = open(output_test_file5,'w')
+f1_test = open(output_test_file1,'w')
 
 while epoch <= max_iter & ~stop:  # loop over the dataset multiple times
 
