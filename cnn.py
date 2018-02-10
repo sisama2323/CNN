@@ -17,7 +17,7 @@ import torch.nn.functional as F
 from utils import *
 from net import *
 
-use_GPU = False
+use_GPU = True
 max_iter = 100
 holdF = 0.1
 model = 'google_net'
@@ -91,11 +91,18 @@ val_acc5 = []
 #%%
 print('Start Training')
 
-# store accuracy
-output_file1 = ('net%s_accuracy1.txt' %(model))
-output_file5 = ('net%s_accuracy5.txt' %(model))
-f5 = open(output_file5,'w')
-f1 = open(output_file1,'w')
+# store accuracy for validation set
+output_file1 = ('net%s_accuracy_val1.txt' %(model))
+output_file5 = ('net%s_accuracy_val5.txt' %(model))
+f5_val = open(output_file5,'w')
+f1_val = open(output_file1,'w')
+
+# store accuracy for test set
+output__test_file1 = ('net%s_accuracy_test1.txt' %(model))
+output__test_file5 = ('net%s_accuracy_test5.txt' %(model))
+f5_test = open(output__test_file5,'w')
+f1_test = open(output__test_file1,'w')
+
 while epoch <= max_iter & ~stop:  # loop over the dataset multiple times
 
     running_loss = 0.0
@@ -129,6 +136,7 @@ while epoch <= max_iter & ~stop:  # loop over the dataset multiple times
                   (epoch + 1, i + 1, running_loss / 2000))
             running_loss = 0.0
 
+    ##########################################################################################
     # test on validation set to prevent overfitting
     top1_val, top5_val = testnet(validationloader, net, use_GPU)
     
@@ -144,26 +152,25 @@ while epoch <= max_iter & ~stop:  # loop over the dataset multiple times
     epoch += 1
 
     # write accuracy of top 5 to file for later plot use
-    f5.write(str(top5_val)+ '\n')
+    f5_val.write(str(top5_val)+ '\n')
     print('Accy.: %f' % (top5_val))
 
     # write accuracy of top 1 to file for later plot use
-    f1.write(str(top1_val)+ '\n')
+    f1_val.write(str(top1_val)+ '\n')
+
+    ##########################################################################################
+    # test on test set
+    top1_test, top5_test = testnet(testloader, net, use_GPU)
+
+    f5_test.write(str(top5_test)+ '\n')
+    f1_test.write(str(top1_test)+ '\n')
+
 
 print('Finished Training')
 
 
 # test dataepoch
-top1_test, top5_test = testnet(testloader, net, use_GPU)
-
-print('Accuracy of the network on the 10000 test images: %d %%' % (100 * top5_test))
-
-
-f5.write(str(top5_test))
-f5.close()
-
-f1.write(str(top1_test))
-f1.close()
+print('Accuracy of the network on the 10000 test images: %d %%' % (top5_test))
 
 # save network
 torch.save(net, 'net_%s.pkl' %(model)) # save entire net
