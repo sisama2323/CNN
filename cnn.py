@@ -17,10 +17,10 @@ import torch.nn.functional as F
 from utils import *
 from net import *
 
-use_GPU = True
+use_GPU = False
 max_iter = 100
 holdF = 0.1
-model = 'net_alex'
+model = 'google_net'
 
 transform = transforms.Compose(
     [transforms.ToTensor(),
