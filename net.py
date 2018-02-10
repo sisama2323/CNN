@@ -208,7 +208,7 @@ class GoogLeNet(nn.Module):
             nn.MaxPool2d(3, stride=1, padding=1),
             nn.Conv2d(64, 192, kernel_size=1),
             nn.BatchNorm2d(192),
-            nn.ReLU(True)
+            nn.ReLU(True),
             nn.MaxPool2d(3, stride=1, padding=1)
         )
 

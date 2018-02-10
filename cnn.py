@@ -20,7 +20,7 @@ from net import *
 use_GPU = False
 max_iter = 100
 holdF = 0.1
-model = '2'
+model = 'google'
 
 transform = transforms.Compose(
     [transforms.ToTensor(),
@@ -69,7 +69,7 @@ classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship'
 # initalize nn
 # Net1(n_cov1, n_cov2, n_kernel, n_hid1, n_hid2)
 # net = Net1(6, 12, 3, 100, 50)
-net = Net_2()
+net = GoogLeNet()
 
 # use GPU
 if use_GPU:
