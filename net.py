@@ -164,7 +164,7 @@ class Inception(nn.Module):
             nn.Conv2d(n_input, n1_b2, kernel_size=1, stride=1),
             nn.BatchNorm2d(n1_b2),
             nn.ReLU(True),
-            nn.Conv2d(n1_b2, n2_b2, kernel_size=3, stride=1),
+            nn.Conv2d(n1_b2, n2_b2, kernel_size=3, stride=1, padding=1),
             nn.BatchNorm2d(n2_b2),
             nn.ReLU(True)
         )
@@ -174,7 +174,7 @@ class Inception(nn.Module):
             nn.Conv2d(n_input, n1_b3, kernel_size=1, stride=1),
             nn.BatchNorm2d(n1_b3),
             nn.ReLU(True),
-            nn.Conv2d(n1_b3, n2_b3, kernel_size=5, stride=1),
+            nn.Conv2d(n1_b3, n2_b3, kernel_size=5, stride=1, padding=2),
             nn.ReLU(True)
         )
 
@@ -187,10 +187,15 @@ class Inception(nn.Module):
         )
         
     def forward(self, x):
+        # print(x.size())
         x1 = self.b1(x)
+        # print(x1.size())
         x2 = self.b2(x)
+        # print(x2.size())
         x3 = self.b3(x)
+        # print(x3.size())
         x4 = self.b4(x)
+        # print(x4.size())
         return torch.cat([x1,x2,x3,x4], 1)
 
 class GoogLeNet(nn.Module):
@@ -211,7 +216,8 @@ class GoogLeNet(nn.Module):
             nn.ReLU(True),
             nn.MaxPool2d(3, stride=1, padding=1)
         )
-
+        # after a1, size = [4, 192, 13, 13]
+        # n_b1 + n2_b2 + n2_b3 + n1_b4
         self.a2 = Inception(n_input=192, n_b1=64, n1_b2=96, n2_b2=128, n1_b3=16, n2_b3=32, n1_b4=32)
         self.a3 = Inception(256, 128, 128, 192, 32, 96, 64)
 
@@ -221,9 +227,9 @@ class GoogLeNet(nn.Module):
         self.a5 = Inception(512, 160, 112, 224, 24,  64,  64)
         self.a6 = Inception(512, 128, 128, 256, 24,  64,  64)
         
-        self.avgpool = nn.AvgPool2d(8, stride=1)
+        self.avgpool = nn.AvgPool2d(4, stride=1)
 
-        self.fc = nn.Linear(512, 10)
+        self.fc = nn.Linear(8192, 10)
 
     def forward(self, x):
         x = self.a1(x)
@@ -233,6 +239,7 @@ class GoogLeNet(nn.Module):
         x = self.a4(x)
         x = self.a5(x)
         x = self.a6(x)
+        # print(x.size())
         x = self.avgpool(x)
         x = x.view(x.size(0), -1)
         x = self.fc(x)
