@@ -20,7 +20,7 @@ from net import *
 use_GPU = False
 max_iter = 100
 holdF = 0.1
-model = '2'
+model = '2adam'
 
 transform = transforms.Compose(
     [transforms.ToTensor(),

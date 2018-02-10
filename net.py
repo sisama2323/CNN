@@ -143,3 +143,60 @@ class Net_2(nn.Module):
         x = self.fc3(x)
         return x
 
+# model 3
+class Net_3(nn.Module):
+    def __init__(self, n_cov1=6, n_cov2=16, n_cov3=32, n_kernel1=3, n_kernel2=3, n_kernel3=3, n_hid1=64, n_hid2=128):
+        super(Net_2, self).__init__()
+        self.n_cov1 = n_cov1
+        self.n_cov2 = n_cov2
+        self.n_cov3 = n_cov3
+        self.n_kernel1 = n_kernel1
+        self.n_kernel2 = n_kernel2
+        self.n_kernel3 = n_kernel3
+        self.n_hid1 = n_hid1
+        self.n_hid2 = n_hid2
+        self.feature = numfeature([n_kernel1, n_kernel2, n_kernel3])
+
+        self.pool = nn.MaxPool2d(2, 2)
+
+        # torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True)
+        self.conv1 = nn.Conv2d(3, self.n_cov1, self.n_kernel1, stride=1, padding=1)
+        nn.init.xavier_uniform(self.conv1.weight)
+        self.conv1_bn = nn.BatchNorm2d(self.n_cov1)
+        
+        self.conv2 = nn.Conv2d(self.n_cov1, self.n_cov2, self.n_kernel2, stride=1, padding=1)
+        nn.init.xavier_uniform(self.conv2.weight)
+        self.conv2_bn = nn.BatchNorm2d(self.n_cov2)
+
+        self.conv3 = nn.Conv2d(self.n_cov2, self.n_cov3, self.n_kernel3, stride=1, padding=1)
+        nn.init.xavier_uniform(self.conv3.weight)
+        self.conv3_bn = nn.BatchNorm2d(self.n_cov3)
+
+        
+        # torch.nn.Linear(in_features, out_features, bias=True)
+        self.fc1 = nn.Linear(self.feature * self.feature * self.n_cov3, self.n_hid1)
+        nn.init.xavier_uniform(self.fc1.weight)
+        self.fc1_bn = nn.BatchNorm2d(self.n_hid1)
+
+        self.fc2 = nn.Linear(self.n_hid1, self.n_hid2)
+        nn.init.xavier_uniform(self.fc2.weight)
+        self.fc2_bn = nn.BatchNorm2d(self.n_hid2)
+
+        self.fc3 = nn.Linear(self.n_hid2, 10)
+        nn.init.xavier_uniform(self.fc2.weight)
+
+    def forward(self, x):
+        x = self.pool(F.relu(self.conv1_bn(self.conv1(x))))
+        x = self.pool(F.relu(self.conv2_bn(self.conv2(x))))
+        x = self.pool(F.relu(self.conv3_bn(self.conv3(x))))
+
+        # leak relu
+        # x = self.pool(F.leaky_relu(self.conv1_bn(self.conv1(x))))
+        # x = self.pool(F.leaky_relu(self.conv2_bn(self.conv2(x))))
+        # x = self.pool(F.leaky_relu(self.conv3_bn(self.conv3(x))))
+
+        x = x.view(-1, self.feature * self.feature * self.n_cov3)
+        x = F.relu(self.fc1_bn(self.fc1(x)))
+        x = F.relu(self.fc2_bn(self.fc2(x)))
+        x = self.fc3(x)
+        return x
