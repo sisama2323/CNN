@@ -79,7 +79,7 @@ if use_GPU:
 criterion = nn.CrossEntropyLoss()
 
 # define adam, learning rate = 0.001, weight_decay
-optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
+optimizer = optim.Adam(net.parameters(), lr=0.001)
 
 epoch = 0
 stop = False
@@ -129,8 +129,8 @@ while epoch <= max_iter & ~stop:  # loop over the dataset multiple times
                   (epoch + 1, i + 1, running_loss / 2000))
             running_loss = 0.0
 
-        # test on validation set to prevent overfitting
-        top1_val, top5_val = testnet(validationloader, net, use_GPU)
+    # test on validation set to prevent overfitting
+    top1_val, top5_val = testnet(validationloader, net, use_GPU)
     
     # validation set's accuracy decrease for three consequtive epoch, stop the training
     val_acc1.append(top1_val)

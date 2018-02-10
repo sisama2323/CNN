@@ -4,6 +4,7 @@ from torch.autograd import Variable
 import torch.nn as nn
 import torch.nn.functional as F
 import torch
+from utils import *
 
 
 # defind nn, example model
@@ -96,27 +97,47 @@ class Net_2(nn.Module):
         self.n_kernel3 = n_kernel3
         self.n_hid1 = n_hid1
         self.n_hid2 = n_hid2
+        self.feature = numfeature([n_kernel1, n_kernel2, n_kernel3])
+
+        self.pool = nn.MaxPool2d(2, 2)
 
         # torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True)
         self.conv1 = nn.Conv2d(3, self.n_cov1, self.n_kernel1, stride=1, padding=1)
+        nn.init.xavier_uniform(self.conv1.weight)
         self.conv1_bn = nn.BatchNorm2d(self.n_cov1)
-        self.pool = nn.MaxPool2d(2, 2)
+        
         self.conv2 = nn.Conv2d(self.n_cov1, self.n_cov2, self.n_kernel2, stride=1, padding=1)
+        nn.init.xavier_uniform(self.conv2.weight)
         self.conv2_bn = nn.BatchNorm2d(self.n_cov2)
+
         self.conv3 = nn.Conv2d(self.n_cov2, self.n_cov3, self.n_kernel3, stride=1, padding=1)
+        nn.init.xavier_uniform(self.conv3.weight)
         self.conv3_bn = nn.BatchNorm2d(self.n_cov3)
+
+        
         # torch.nn.Linear(in_features, out_features, bias=True)
-        self.fc1 = nn.Linear(4 * 4 * self.n_cov3, self.n_hid1)
+        self.fc1 = nn.Linear(self.feature * self.feature * self.n_cov3, self.n_hid1)
+        nn.init.xavier_uniform(self.fc1.weight)
         self.fc1_bn = nn.BatchNorm2d(self.n_hid1)
+
         self.fc2 = nn.Linear(self.n_hid1, self.n_hid2)
+        nn.init.xavier_uniform(self.fc2.weight)
         self.fc2_bn = nn.BatchNorm2d(self.n_hid2)
+
         self.fc3 = nn.Linear(self.n_hid2, 10)
+        nn.init.xavier_uniform(self.fc2.weight)
 
     def forward(self, x):
         x = self.pool(F.relu(self.conv1_bn(self.conv1(x))))
         x = self.pool(F.relu(self.conv2_bn(self.conv2(x))))
         x = self.pool(F.relu(self.conv3_bn(self.conv3(x))))
-        x = x.view(-1, 4 * 4 * self.n_cov3)
+
+        # leak relu
+        # x = self.pool(F.leaky_relu(self.conv1_bn(self.conv1(x))))
+        # x = self.pool(F.leaky_relu(self.conv2_bn(self.conv2(x))))
+        # x = self.pool(F.leaky_relu(self.conv3_bn(self.conv3(x))))
+
+        x = x.view(-1, self.feature * self.feature * self.n_cov3)
         x = F.relu(self.fc1_bn(self.fc1(x)))
         x = F.relu(self.fc2_bn(self.fc2(x)))
         x = self.fc3(x)
