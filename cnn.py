@@ -37,7 +37,7 @@ print('model type: %s' %(model))
 print('Use GPU: %s' %(use_GPU))
 
 # use_GPU = True
-max_iter = 100
+max_iter = 20
 holdF = 0.1
 # model = 'google_net'
 
