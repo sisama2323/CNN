@@ -37,7 +37,7 @@ print('model type: %s' %(model))
 print('Use GPU: %s' %(use_GPU))
 
 # use_GPU = True
-max_iter = 20
+max_iter = 100
 holdF = 0.1
 # model = 'google_net'
 
@@ -91,15 +91,15 @@ classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship'
 if model == 'google':
     net = GoogLeNet()
     # define adam, learning rate = 0.001, weight_decay
-    optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
+    optimizer = optim.SGD(net.parameters(), lr=0.0001, momentum=0.9)
 elif model == 'alex':
     net = Alex_net()
     # define adam, learning rate = 0.001, weight_decay
-    optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
+    optimizer = optim.SGD(net.parameters(), lr=0.0001, momentum=0.9)
 elif model == 'mine':
     net = Net_2()
     # define adam, learning rate = 0.001, weight_decay
-    optimizer = optim.Adam(net.parameters(), lr=0.001)
+    optimizer = optim.Adam(net.parameters(), lr=0.0001)
 
     
 
