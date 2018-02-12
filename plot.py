@@ -3,10 +3,10 @@ import os.path as osp
 import os
 import matplotlib.pyplot as plt
 
-test_1_file = 'CNN/netmine_accuracy_test1.txt'
-test_5_file = 'CNN/netmine_accuracy_test5.txt'
-val_1_file = 'CNN/netmine_accuracy_val1.txt'
-val_5_file = 'CNN/netmine_accuracy_val5.txt'
+test_1_file = 'CNN/netalex_accuracy_test1.txt'
+test_5_file = 'CNN/netalex_accuracy_test5.txt'
+val_1_file = 'CNN/netalex_accuracy_val1.txt'
+val_5_file = 'CNN/netalex_accuracy_val5.txt'
 
 
 test_1 = []
@@ -38,7 +38,7 @@ plt.plot(val_5, '--', label='Validation set Top5')
 plt.legend()
 plt.xlabel('epoch')
 plt.ylabel('accuracy')
-plt.title('Net1')
+plt.title('Alex')
 plt.show()
 
 
