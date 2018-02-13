@@ -1,0 +1,20 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Classification}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Gradient Check}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{BackPropagation Implementation}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Adding the "Tricks of the Trade"}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{Shuffle Examples and Minibatches}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.2}{The Sigmoid tanh}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.3}{Gaussian Initialization}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.4}{Add Momentum}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.5}{Summary Table}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{Experiment with Network Topology}{}% 11
+\BOOKMARK [2][-]{subsection.4.1}{Halving and Doubling Number of Hidden Units}{section.4}% 12
+\BOOKMARK [2][-]{subsection.4.2}{Increase Number of Hidden Layers}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.3}{Extra Credit}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.4}{ReLu}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.5}{Drop-out}{section.4}% 16
+\BOOKMARK [1][-]{section.5}{Conclusion}{}% 17
+\BOOKMARK [1][-]{section.6}{Contributions}{}% 18
+\BOOKMARK [2][-]{subsection.6.1}{Siwei Guo}{section.6}% 19
+\BOOKMARK [2][-]{subsection.6.2}{Jingyi Yang}{section.6}% 20

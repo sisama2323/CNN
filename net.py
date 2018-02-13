@@ -128,14 +128,14 @@ class Net_2(nn.Module):
         nn.init.xavier_uniform(self.fc2.weight)
 
     def forward(self, x):
-        x = self.pool(F.relu(self.conv1_bn(self.conv1(x))))
-        x = self.pool(F.relu(self.conv2_bn(self.conv2(x))))
-        x = self.pool(F.relu(self.conv3_bn(self.conv3(x))))
+        # x = self.pool(F.relu(self.conv1_bn(self.conv1(x))))
+        # x = self.pool(F.relu(self.conv2_bn(self.conv2(x))))
+        # x = self.pool(F.relu(self.conv3_bn(self.conv3(x))))
 
         # leak relu
-        # x = self.pool(F.leaky_relu(self.conv1_bn(self.conv1(x))))
-        # x = self.pool(F.leaky_relu(self.conv2_bn(self.conv2(x))))
-        # x = self.pool(F.leaky_relu(self.conv3_bn(self.conv3(x))))
+        x = self.pool(F.leaky_relu(self.conv1_bn(self.conv1(x))))
+        x = self.pool(F.leaky_relu(self.conv2_bn(self.conv2(x))))
+        x = self.pool(F.leaky_relu(self.conv3_bn(self.conv3(x))))
 
         x = x.view(-1, self.feature * self.feature * self.n_cov3)
         x = F.relu(self.fc1_bn(self.fc1(x)))

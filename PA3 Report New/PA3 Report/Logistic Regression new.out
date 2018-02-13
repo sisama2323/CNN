@@ -1,0 +1,11 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Problem Formulation}{}% 2
+\BOOKMARK [1][-]{section.3}{Technical Approach}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Logistic Regression}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Softmax Regression}{section.3}% 5
+\BOOKMARK [1][-]{section.4}{Logistic Regression via Gradient Descent}{}% 6
+\BOOKMARK [2][-]{subsection.4.1}{Loss Function \(E\)}{section.4}% 7
+\BOOKMARK [2][-]{subsection.4.2}{Percent Correct}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.3}{Weights Display}{section.4}% 9
+\BOOKMARK [1][-]{section.5}{Regularization}{}% 10
+\BOOKMARK [2][-]{subsection.5.1}{Regularization}{section.5}% 11

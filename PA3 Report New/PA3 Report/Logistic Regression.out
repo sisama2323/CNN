@@ -1,0 +1,23 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Technical Approach}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Logistic Regression}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Softmax Regression}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Logistic Regression via Gradient Descent}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{Loss Function \(E\)}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.2}{Percent Correct}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.3}{Weights Display}{section.3}% 8
+\BOOKMARK [1][-]{section.4}{Regularization}{}% 9
+\BOOKMARK [2][-]{subsection.4.1}{Regularization}{section.4}% 10
+\BOOKMARK [2][-]{subsection.4.2}{Accuracy with Different }{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.3}{ Length of Weight Vector}{section.4}% 12
+\BOOKMARK [2][-]{subsection.4.4}{Test Set Error vs Log of }{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.5}{Weights with Different \040Values}{section.4}% 14
+\BOOKMARK [1][-]{section.5}{Softmax Regression via Gradient Descent}{}% 15
+\BOOKMARK [2][-]{subsection.5.1}{ Values}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.2}{Loss Function \(E\) and Percent Correct}{section.5}% 17
+\BOOKMARK [2][-]{subsection.5.3}{Extra Credit}{section.5}% 18
+\BOOKMARK [1][-]{section.6}{Conclusion}{}% 19
+\BOOKMARK [1][-]{section.7}{Contributions}{}% 20
+\BOOKMARK [2][-]{subsection.7.1}{Siwei Guo}{section.7}% 21
+\BOOKMARK [2][-]{subsection.7.2}{Jingyi Yang}{section.7}% 22
+\BOOKMARK [1][-]{section.8}{Code}{}% 23

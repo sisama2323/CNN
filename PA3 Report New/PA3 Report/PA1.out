@@ -1,0 +1,20 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Problem Formulation}{}% 2
+\BOOKMARK [1][-]{section.3}{Technical Approach}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Logistic Regression}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Softmax Regression}{section.3}% 5
+\BOOKMARK [1][-]{section.4}{Logistic Regression via Gradient Descent}{}% 6
+\BOOKMARK [2][-]{subsection.4.1}{Loss Function \(E\)}{section.4}% 7
+\BOOKMARK [2][-]{subsection.4.2}{Percent Correct}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.3}{Weights Display}{section.4}% 9
+\BOOKMARK [1][-]{section.5}{Regularization}{}% 10
+\BOOKMARK [2][-]{subsection.5.1}{Regularization}{section.5}% 11
+\BOOKMARK [2][-]{subsection.5.2}{Accuracy with Different }{section.5}% 12
+\BOOKMARK [2][-]{subsection.5.3}{ Length of Weight Vector}{section.5}% 13
+\BOOKMARK [1][-]{section.6}{Citations, figures, tables, references}{}% 14
+\BOOKMARK [2][-]{subsection.6.1}{Citations within the text}{section.6}% 15
+\BOOKMARK [2][-]{subsection.6.2}{Footnotes}{section.6}% 16
+\BOOKMARK [2][-]{subsection.6.3}{Figures}{section.6}% 17
+\BOOKMARK [2][-]{subsection.6.4}{Tables}{section.6}% 18
+\BOOKMARK [1][-]{section.7}{Preparing PostScript or PDF files}{}% 19
+\BOOKMARK [2][-]{subsection.7.1}{Margins in LaTeX}{section.7}% 20

@@ -98,6 +98,7 @@ elif model == 'alex':
     optimizer = optim.SGD(net.parameters(), lr=0.0001, momentum=0.9)
 elif model == 'mine':
     net = Net_2()
+    # net = Net_2(n_cov1=6, n_cov2=16, n_cov3=32, n_kernel1=5, n_kernel2=5, n_kernel3=3, n_hid1=64, n_hid2=128)
     # define adam, learning rate = 0.001, weight_decay
     optimizer = optim.Adam(net.parameters(), lr=0.0001)
 
