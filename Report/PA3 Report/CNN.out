@@ -1,0 +1,24 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Deep CNN for Image Classification}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{AlexNet Model}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Self-built Model}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{GoogLeNet Model }{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Discussion}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{Transfer Learning}{}% 7
+\BOOKMARK [2][-]{subsection.3.1}{VGG16 Model}{section.3}% 8
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Dataset and Setup}{subsection.3.1}% 9
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Discussion}{subsection.3.1}% 10
+\BOOKMARK [1][-]{section.4}{Transfer Learning}{}% 11
+\BOOKMARK [2][-]{subsection.4.1}{Visualization}{section.4}% 12
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Experiment Setup}{subsection.4.1}% 13
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Discussion}{subsection.4.1}% 14
+\BOOKMARK [2][-]{subsection.4.2}{Feature Extraction}{section.4}% 15
+\BOOKMARK [3][-]{subsubsection.4.2.1}{Experiment Setup}{subsection.4.2}% 16
+\BOOKMARK [3][-]{subsubsection.4.2.2}{Discussion}{subsection.4.2}% 17
+\BOOKMARK [1][-]{section.5}{Conclusion}{}% 18
+\BOOKMARK [1][-]{section.6}{Contributions}{}% 19
+\BOOKMARK [2][-]{subsection.6.1}{Siwei Guo}{section.6}% 20
+\BOOKMARK [2][-]{subsection.6.2}{Jingyi Yang}{section.6}% 21
+\BOOKMARK [2][-]{subsection.6.3}{Wenxin Ling}{section.6}% 22
+\BOOKMARK [2][-]{subsection.6.4}{Yue Meng}{section.6}% 23
+\BOOKMARK [1][-]{section.7}{Code Reference}{}% 24

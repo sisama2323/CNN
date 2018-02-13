@@ -1,0 +1,26 @@
+%TODO
+
+%Generally speaking, applying different tricks to neural networks does not affect much on the training results, say accuracy and loss. However, what needs to be taken into consideration is the trick parameter choices and acceleration effect tricks can have on training process. For example, weight initialization needs to be chosen randomly so that sigmoid is primarily activated in linear region.   
+% 
+%Moreover, the number of hidden nodes can have different effects on the training results. If the number of hidden nodes are too large or too small, the accuracy will drop and when the number of hidden nodes are too large, the process will be long.
+% 
+%Increase hidden layers does not affect the results of the neural network. With that being said, further experiment with more numbers of hidden layers ought to be conducted. 
+
+%New
+Transfer learning is a solid method for creating models for small datasets. By using the learned features of very deep convolutional networks trained on large scale datasets, we are able to modify and fine-tune the last layer for a different classification task, and achieve an accuracy of 75.54\%.
+
+By visualizing filters and activations, we saw that convolutional layers focus on specific type of features in each level. It's the diversity of filters in initial layer that guarantees most of the useful geometry features can be preserved during feed forward process, and layers afterwards can perceive semantic informations as needed. Also we proved that number of the conv blocks does matter in classification task, and to some extent avoid overfitting. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+%In all, logistic regression and softmax regression both do excellent job in classification for MNIST. Their classifiers just try to learn the pattern from the input "positive" pattern and give them in postive value, then try to put other pattern in negative value. For logistic we reach edaccuracy of 98$\%$ for 2vs3 and 96$\%$ for 2vs8. For softmax we reached $94\%$ for 10-way classification. Also we show that our check on valid dataset is a good "early stopping" method which avoid "overfitting", and even do better than regularization method when there are plenty of labelled data considering dimension of features. The regularzation metho d decrease the length of weight and use this to decrease the complexity of the model. When samples number are insufficient, this works well. Also at last we use confuse matrix to better understand the performance metrics for multi-way classification.
